@@ -103,7 +103,7 @@ def build_model():
     
     # specify parameter values for the grid search
     parameters = {
-        'vect__max_features': (1000, 2000, 5000),
+        'vect__max_features': (None, 5000, 10000),
         'vect__max_df': (0.5, 0.75, 1),
         'clf__estimator__min_samples_split': [10, 20, 30],
     }
