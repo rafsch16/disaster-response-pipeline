@@ -1,3 +1,4 @@
+# import statements
 import json
 import plotly
 import pandas as pd
@@ -33,7 +34,7 @@ df = pd.read_sql_table('disaster_response_data', engine)
 
 # load model
 cwd = os.getcwd()
-model = joblib.load(cwd+"/models/classifier.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -46,18 +47,18 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
-    
+    category_names = list(df.iloc[:,5:].columns)
+    categories_counts = list(df.iloc[:,5:].sum(axis=0))
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
         {
             'data': [
-                Bar(
-                    x=genre_names,
-                    y=genre_counts
-                )
-            ],
+                {"x": genre_names,
+                 "y": genre_counts,
+                 "type": "bar",
+                }],
 
             'layout': {
                 'title': 'Distribution of Message Genres',
@@ -68,10 +69,45 @@ def index():
                     'title': "Genre"
                 }
             }
-        }
-        
-    
-    ]
+        },
+        {
+            'data': [
+                {"values": genre_counts,
+                 "labels": genre_names,
+                 "type": "pie",
+                }],
+            
+            'layout': {
+                'title': 'Distribution of Message Genres',
+                'yaxis': {
+                    'title': "Count",
+
+                },
+                'xaxis': {
+                    'title': "Genre",
+                }
+            }
+        },
+        {
+            'data': [
+                {"x": category_names,
+                 "y": categories_counts,
+                 "type": "bar"
+                }],
+
+            'layout': {
+                'title': 'Distribution of Message Categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+                    'title': "Category",
+                    'tickangle': 45,
+                    'automargin': True
+                }
+           }
+        }]
+         
     
     # encode plotly graphs in JSON
     ids = ["graph-{}".format(i) for i, _ in enumerate(graphs)]
@@ -79,8 +115,7 @@ def index():
     
     # render web page with plotly graphs
     return render_template('master.html', ids=ids, graphJSON=graphJSON)
-
-
+    
 # web page that handles user query and displays model results
 @app.route('/go')
 def go():
