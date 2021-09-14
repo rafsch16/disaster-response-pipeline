@@ -19,11 +19,23 @@ The model will be accesible through a web app, where an emergency worker can inp
 
 ## File Descriptions<a name="files"></a>
 
-The file '../data/process_data.py' contains the ETL pipeline for the messages and categories datasets.
+The file **'../data/process_data.py'** contains the ETL pipeline for the messages and categories datasets.
+- Loads the messages and categories datasets
+- Merges the two datasets
+- Cleans the data (by creating dummy variables for the categories)
+- Stores it in a SQLite database
 
-The file '../models/train_classifier.py' contains the machine learning pipeline to train the classifier.
+The file **'../models/train_classifier.py'** contains the machine learning pipeline to train the classifier.
+- Loads data from the SQLite database
+- Splits the dataset into training and test sets
+- Builds a text processing and machine learning pipeline (text processing involves tokenization and lemmatization; machine learning is based on a multioutput random forest classifier)
+- Trains and tunes a model using GridSearchCV
+- Outputs results on the test set (recall, precision and accuracy scores)
+- Exports the final model as a pickle file
 
-The file '../app/run.py' uses Flask to run a web app.
+The file **'../app/run.py'** uses Flask to run a web app.
+- Visualization of the data using Plotly.
+- Handles user query and displays model results.
 
 ## Instructions<a name="instructions"></a>
 1. Run the following commands in the project's root directory to set up your database and model.
@@ -39,5 +51,4 @@ The file '../app/run.py' uses Flask to run a web app.
 3. Go to http://0.0.0.0:3001/
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
-
-The disaster dataset to train the model was provided by Figure Eight. The code for the web app was provided by Udacity, where only the data visualization was modified.
+The disaster dataset to train the model was provided by **Figure Eight**. The code for the web app was mostly provided by **Udacity**, only the data visualization part was modified. The rest of the code was written according to guidelines from Udacity.
