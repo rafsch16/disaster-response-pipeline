@@ -15,7 +15,7 @@ There should be no necessary libraries to run the code here beyond the Anaconda 
 
 This project is part of the Udacity course in Data Science. The files related to this project were provided by Udacity, with modifications added by the student. The aim of the project is to analyse disaster data from Figure Eight to build a model for an API that classifies disaster data.
 
-The model will be accesible through a web app, where an emergency worker can input a new message and get classification results in several categories. This web app will also display visualizations of the data.
+The model will be accessible through a web app, where an emergency worker can input a new message and get classification results in several categories. This web app will also display visualizations of the data.
 
 ## File Descriptions<a name="files"></a>
 
@@ -34,8 +34,8 @@ The file **'../models/train_classifier.py'** contains the machine learning pipel
 - Exports the final model as a pickle file
 
 The file **'../app/run.py'** uses Flask to run a web app.
-- Visualization of the data using Plotly.
-- Handles user query and displays model results.
+- Visualizes aspects of the dataset using Plotly
+- Handles user queries and displays model results
 
 ## Instructions<a name="instructions"></a>
 1. Run the following commands in the project's root directory to set up your database and model.
