@@ -93,7 +93,7 @@ def save_data(df, database_filename):
     engine = create_engine(path)
     
     # output data into SQL table
-    df.to_sql('disaster_response_data', engine, index=False)
+    df.to_sql('disaster_response_data', engine, index=False, if_exists='replace')
 
 def main():
     if len(sys.argv) == 4:
