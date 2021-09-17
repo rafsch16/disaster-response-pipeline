@@ -62,6 +62,9 @@ def clean_data(df):
         # convert column from string to numeric
         categories[column] = pd.to_numeric(categories[column])
         
+    # ensure binary values
+    categories['related'].replace(2,1,inplace=True)
+        
     # drop the original categories column from `df`
     df.drop(columns='categories',inplace=True)
     
@@ -84,9 +87,8 @@ def save_data(df, database_filename):
     
     '''
     # obtain path
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    path ="sqlite:///"+ os.path.join(dir_path, database_filename)
-    
+    path ="sqlite:///"+ database_filename
+
     # creat a database engine
     engine = create_engine(path)
     

@@ -40,7 +40,7 @@ def load_data(database_filepath):
         category_names (np.array): Response categories
     '''
     # obtain path to the database
-    path ="sqlite:////home/workspace/"+ database_filepath
+    path ="sqlite:///"+ database_filepath
     
     # create a database engine
     engine = create_engine(path)
